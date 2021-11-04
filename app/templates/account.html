@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Account Overview</h3>
+    <div class="account-container" style="margin-bottom: 2rem;">
+        <div class="account-grid">
+            <div class="transactions">
+                <a href="/transaction/add" class="btn btn-lg btn-primary">Add Transaction</a>
+                <hr style="color: white;">
+                {% if transactions %}
+                {% for transaction in transactions %}
+                <p><b>Name : </b>{{ transaction.name }}</p>
+                <p><b>Amount : </b>{% if transaction.income %}+{% else %}-{% endif %}{{ transaction.amount }}</p>
+                {% if transaction.frequency == 4 %}
+                <p><b>Frequency : </b>Monthly</p>
+                <p><b>Day : </b>{{ transaction.day_of_month.day }}</p>
+                {% elif transaction.frequency == 3 %}
+                <p><b>Frequency : </b>Bi-Weekly</p>
+                <p><b>Days : </b> 1 & 15</p>
+                {% elif transaction.frequency == 2 %}
+                <p><b>Frequency : </b>Weekly</p>
+                <p><b>Day : </b>{% if transaction.day_of_week == 1 %}Monday{% elif transaction.day_of_week == 2
+                    %}Tuesday{% elif transaction.day_of_week == 3 %}Wednesday{% elif transaction.day_of_week == 4 %}
+                    Thursday {% elif transaction.day_of_week == 5 %}Friday{% endif %}</p>
+                {% elif transaction.frequency == 1 %}
+                <p><b>Frequency : </b>Daily</p>
+                {% endif %}
+
+                <a href="/transaction/delete/{{ transaction.id }}" class="btn btn-sm btn-danger">Delete</a>
+                <hr style="color: white;">
+                {% endfor %}
+                {% else %}
+                <p>You haven't added any transactions</p>
+                {% endif %}
+            </div>
+            <div class="information">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Account Information</h3>
+                <p><b>Current Balance : </b>{{ current_user.current_balance }}</p>
+                <p><b>Monthly Net Income : </b>{{ income_expense[0] - income_expense[1] }}</p>
+                <p><b>Next Transaction : </b></p>
+                <a href="/account/update" class="btn btn-sm btn-primary">Update Information</a>
+            </div>
+            <div class="graphs">
+                {% if transactions %}
+                <div id="graph1">
+                    <canvas id="category" width="252" height="252"></canvas>
+                </div>
+                <div id="graph2">
+                    <canvas id="in-out" width="252" height="252"></canvas>
+                </div>
+                {% else %}
+                <h3>You haven't added any transactions</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    Chart.defaults.color = 'rgb(255,255,255)';
+    const catC = $('#category');
+    const category_chart = new Chart(catC, {
+        type: 'doughnut',
+        data: {
+            labels: {{ categories | safe }},
+    datasets: [{
+        label: "Amount",
+        data: {{ category_amounts | safe }},
+        fill: true,
+        backgroundColor: [
+        'rgb(6,255,148)',
+        '#dc3545',
+        '#fd7e14',
+        '#ffc107',
+        '#0dcaf0',
+        '#198754',
+        '#6610f2',
+    ],
+            }]
+        },
+    options: {
+        responsve: false
+    }
+    });
+
+    const inout = $('#in-out');
+    const in_out_chart = new Chart(inout, {
+        type: 'bar',
+        data: {
+            labels: ['Income', 'Expense'],
+            datasets: [{
+                label: 'Amount',
+                data: {{ income_expense | safe }},
+        fill: true,
+        backgroundColor: 'rgb(6,148,255)',
+        }]
+        },
+    options: {
+        responsve: false
+    }
+    })
+</script>
+{% endblock %}

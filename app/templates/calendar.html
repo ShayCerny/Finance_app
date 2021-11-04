@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<a href="/picker" class="btn btn-sm btn-info" style="margin-left: 1rem;">Back</a>
+<h3 style="text-align: center;">{{ month_obj.name }}</h3>
+{{ exculde_count }}
+<div class="calendar-container" style="margin-top: 9rem !important;">
+    <div class="calendar">
+        <div class="dow">Monday</div>
+        <div class="dow">Tuesday</div>
+        <div class="dow">Wednesday</div>
+        <div class="dow">Thursday</div>
+        <div class="dow">Friday</div>
+        <div class="dow">Saturday</div>
+        <div class="dow">Sunday</div>
+        {% for day in month_obj.days %}
+            {% if day.day == 0 %}
+                <div class="empty-day">
+                </div>
+            {% elif loop.index < todays_date.day and todays_date.month == month and todays_date.year == year %}
+            <div class="day {% if todays_date.day == day.day and todays_date.month == month and todays_date.year == year %} today {% endif %}">
+                <p class="date">{{ day.day }}</p>
+            </div>
+            {% else %}
+                <div class="day {% if todays_date.day == day.day and todays_date.month == month and todays_date.year == year %} today {% endif %}">
+                    <p class="date">{{ day.day }}</p>
+                    <p class="balance">{{'%0.2f' % day.balance |float}}</p>
+                    {% for transaction in day.transactions %}
+                    <p>{{ transaction.name }} {% if transaction.income == True %}+{% else %}-{% endif %}{{ transaction.amount }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

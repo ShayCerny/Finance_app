@@ -1,0 +1,293 @@
+body::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+    background-color: lightblue;
+}
+
+@media only screen and (min-width: 992px) {
+    .nav-seperator {
+        color: white;
+        transform: rotateZ(90deg);
+        width: 2rem;
+        position: relative;
+        top: .2rem;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .nav-seperator {
+        display: none;
+    }
+}
+
+.custom-shape-divider-top-1635727368 {
+    width: 100%;
+    overflow: hidden;
+}
+
+.custom-shape-divider-top-1635727368 svg {
+    width: calc(100% + 1.3px);
+    height: 100px;
+}
+
+/* Messages */
+.messages{
+    position: absolute;
+    top: 7rem;
+    left: 33%;
+    right: 33%;
+    width: 33%;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem 1rem 0 1rem;
+    background-color: rgb(211, 211, 211, .5);
+    border-radius: 25px;
+    border: rgb(175, 175, 175) 2px solid;
+}
+
+.messages ul{
+    list-style: none;
+}
+
+.error{
+    color: red;
+}
+
+.success{
+    color: green;
+}
+
+.warning{
+    color: yellow;
+}
+
+.info{
+    color: cyan;
+}
+
+/* Forms */
+
+.form-container{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    text-align: center;
+    width: 35%;
+    margin: auto;
+}
+
+.field{
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.field span{
+    text-align: left;
+    width: 60% ;
+    margin-right: 1rem;
+}
+
+.field input{
+    border-radius: 25px;
+    border: rgb(138, 138, 138, .6) 2px solid;
+    padding-left: .5rem;
+    transition: border 300ms;
+    outline: none;
+    width: 65%;
+}
+
+.field #dom{
+    width: 65%;
+}
+
+.field #income{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-left: -3.5rem;
+}
+
+.field select{
+    width: 65%;
+    border-radius: 25px;
+    border: rgb(138, 138, 138, .6) 2px solid;
+    padding-left: .5rem;
+    transition: border 300ms;
+    outline: none;
+}
+
+.field input:focus-visible{
+    border: #0dcaf0af solid 2px;
+    outline: none;
+}
+
+
+/* Account */
+
+.account-grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns:[start] 25% [transaction-end] 75%;
+    grid-template-rows: repeat(2, 20rem);
+    gap: 2rem;
+}
+
+.transactions{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    grid-area: 1 / start / 3 / transaction-end;
+    overflow-y: scroll;
+}
+.transactions::-webkit-scrollbar {
+    display: none;
+  }
+
+.information{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    grid-area: 1 / transaction-end / 2 / 3;
+}
+
+.graphs{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    grid-area: 2 / transaction-end / 3 / 3;
+    justify-content: space-evenly;
+}
+
+/* Update Transaction */
+
+.update-transaction-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.transaction-info{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    text-align: center;
+}
+
+.transaction-info p{
+    margin-bottom: 2rem;
+}
+
+.update-transaction-form-container{
+    background-color: #212529c2;
+    border: #3c4349 solid 2px ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #212529;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 35%;
+}
+
+/* Picker */
+
+.year{
+    display: grid;
+    grid-template-columns: repeat(4, 15rem);
+    grid-template-rows: repeat(3, 15rem);
+    margin-left: 20%;
+    margin-top: 2rem;
+    font-size: .6rem;
+}
+
+.month-link{
+    text-decoration: none;
+}
+
+.month{
+    display: grid;
+    grid-template-columns: repeat(7, 2rem);
+    grid-template-rows: repeat(6, 2rem);
+    gap: .0625rem;
+    text-decoration: none;
+    color: black;
+}
+
+.day{
+    background-color: rgb(221, 221, 221);
+    font-size: x-small;
+}
+
+.empty-day{
+    background-color: lightgrey;
+}
+
+/* Calendar */
+
+.calendar{
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(7, 10rem);
+    grid-template-rows:2rem repeat(6, 10rem);
+    grid-gap: 3px;
+}
+
+.dow{
+    text-align: center;
+}
+.day p{
+    margin: .5rem;
+}
+
+.date{
+    font-size: 16px;
+}
+.calendar-container{
+    width: 80%;
+    height: 90vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.balance{
+    font-size: 16px;
+}
+.today{
+    background-color: rgb(250, 250, 186) !important;
+}

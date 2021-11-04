@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h4 style="text-align: center; margin-bottom: 3rem;">Update Account</h4>
+        <a href="/account/password" class="btn btn-sm btn-primary" style="width: 50%; margin: auto; margin-bottom: 2rem;">Change password</a>
+        <form class="form" method="POST" action="/account/update">
+            {{ form.csrf_token }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <div class="field">
+                    <span>{{field.label}}{% if field.flags.required %}* {% endif %}:</span> {{field}}
+                    {% for error in field.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary btn-sm" value="Update">
+        </form>
+    </div>
+</div>
+{% endblock %}
